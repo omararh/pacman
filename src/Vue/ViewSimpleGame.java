@@ -1,5 +1,5 @@
 package Vue;
-import Model.Game;
+import Model.Game.Game;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -34,7 +34,6 @@ public class ViewSimpleGame implements Observer {
     private void setTurn() {
         label.setText("current turn " + game.getTurn());
     }
-
 
     @Override
     public void update(Observable o, Object arg) {

@@ -1,9 +1,13 @@
 package Controller;
-import Model.SimpleGame;
-public class GameController {
-    public SimpleGame game;
-    public GameController(SimpleGame game) {
+import Model.Game.Game;
+
+public abstract class AbstractController {
+    protected Game game;
+    public AbstractController(Game game) {
         this.game = game;
+    }
+    public void setTurnsBySecond(int time) {
+        this.game.setTurnsBySecond(1000/time);
     }
     public void step(){
         this.game.step();

@@ -1,7 +1,7 @@
 package Vue;
 
-import Controller.GameController;
-import Model.SimpleGame;
+import Controller.AbstractController;
+import Model.Game.Game;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,7 +12,6 @@ import javax.swing.JSlider;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-
 import java.awt.GridLayout;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
@@ -22,7 +21,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class ViewCommand implements Observer {
-
     private JFrame windowCommand;
     private JPanel mainPanel;
     private JPanel topPanel;
@@ -37,17 +35,16 @@ public class ViewCommand implements Observer {
     private JButton runBtn;
     private JButton stepBtn;
     private JSlider slider;
-    private JLabel text;
     private JLabel sliderLabel;
-
-    private GameController gameController;
-    private SimpleGame game;
+    private JLabel text;
+    private AbstractController controller;
+    private Game game;
     static final int slider_min = 0;
     static final int slider_max = 10;
-    static final int slider_init = 2;
+    public static final int slider_init = 2;
 
-    public ViewCommand(GameController gameController, SimpleGame game) {
-        this.gameController = gameController;
+    public ViewCommand(AbstractController controller, Game game) {
+        this.controller = controller;
         this.game = game;
         this.game.addObserver(this);
 
@@ -68,10 +65,14 @@ public class ViewCommand implements Observer {
         text.setText("Turn : " + turn);
     }
     private void initButtons() {
-        Icon icon_restart = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Icons/icon_restart.png")));
-        Icon icon_run = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Icons/icon_run.png")));
-        Icon icon_step = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Icons/icon_step.png")));
-        Icon icon_pause = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Icons/icon_pause.png")));
+        Icon icon_restart = new ImageIcon(Objects.requireNonNull(getClass()
+                .getResource("/Icons/icon_restart.png")));
+        Icon icon_run = new ImageIcon(Objects.requireNonNull(getClass()
+                .getResource("/Icons/icon_run.png")));
+        Icon icon_step = new ImageIcon(Objects.requireNonNull(getClass()
+                .getResource("/Icons/icon_step.png")));
+        Icon icon_pause = new ImageIcon(Objects.requireNonNull(getClass()
+                .getResource("/Icons/icon_pause.png")));
 
         restartBtn = new JButton(icon_restart);
         runBtn = new JButton(icon_run);
@@ -82,7 +83,6 @@ public class ViewCommand implements Observer {
         stepBtn.setEnabled(true);
         pauseBtn.setEnabled(false);
     }
-
     /*
      * Set the behavior after a click of each button
      */
@@ -93,43 +93,40 @@ public class ViewCommand implements Observer {
             stepBtn.setEnabled(false);
             pauseBtn.setEnabled(true);
 
-            gameController.play();
+            controller.play();
         });
-
-
         pauseBtn.addActionListener(e -> {
             runBtn.setEnabled(true);
             restartBtn.setEnabled(true);
             stepBtn.setEnabled(true);
             pauseBtn.setEnabled(false);
 
-            gameController.pause();
+            controller.pause();
         });
-
         restartBtn.addActionListener(e -> {
             runBtn.setEnabled(true);
             restartBtn.setEnabled(false);
             stepBtn.setEnabled(true);
             pauseBtn.setEnabled(false);
 
-            gameController.restart();
+            controller.restart();
         });
-
         stepBtn.addActionListener(e -> {
             runBtn.setEnabled(true);
             restartBtn.setEnabled(true);
             stepBtn.setEnabled(true);
             pauseBtn.setEnabled(false);
 
-            gameController.step();
+            controller.step();
+        });
+        slider.addChangeListener(e->{
+            controller.setTurnsBySecond(slider.getValue());
         });
     }
-
     private void initText() {
         text = new JLabel("", SwingConstants.CENTER);
         setTurn(0);
     }
-
     private void initSlider() {
         sliderLabel = new JLabel("Number of turn per second", JLabel.CENTER);
         slider = new JSlider(JSlider.HORIZONTAL, slider_min, slider_max,
@@ -140,7 +137,6 @@ public class ViewCommand implements Observer {
         slider.setPaintTicks(true);
         slider.setPaintLabels(true);
     }
-
     private void initLeftBottomPanel() {
         leftBottomPanel = new JPanel();
         leftBottomLayout = new GridLayout(2, 1);
@@ -149,7 +145,6 @@ public class ViewCommand implements Observer {
         leftBottomPanel.add(sliderLabel);
         leftBottomPanel.add(slider);
     }
-
     private void initBottomPanel() {
         bottomPanel = new JPanel();
         bottomLayout = new GridLayout(1, 2);
@@ -158,7 +153,6 @@ public class ViewCommand implements Observer {
         bottomPanel.add(leftBottomPanel);
         bottomPanel.add(text);
     }
-
     private void initTopPanel() {
         topPanel = new JPanel();
         topLayout = new GridLayout(1, 4);
@@ -169,7 +163,6 @@ public class ViewCommand implements Observer {
         topPanel.add(stepBtn);
         topPanel.add(pauseBtn);
     }
-
     private void initMainPanel() {
         mainPanel = new JPanel();
         mainLayout = new GridLayout(2, 1);
@@ -178,7 +171,6 @@ public class ViewCommand implements Observer {
         mainPanel.add(topPanel);
         mainPanel.add(bottomPanel);
     }
-
     private void initCommandWindow() {
         windowCommand = new JFrame();
         windowCommand.setTitle("Commande");
@@ -196,7 +188,6 @@ public class ViewCommand implements Observer {
         windowCommand.add(mainPanel);
         windowCommand.setVisible(true);
     }
-
     @Override
     public void update(Observable o, Object arg) {
         setTurn((int) arg);
