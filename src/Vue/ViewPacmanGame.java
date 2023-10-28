@@ -1,61 +1,42 @@
 package Vue;
-import Model.Game.Maze;
 import Model.Game.PacmanGame;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 
 public class ViewPacmanGame extends JFrame {
-    final String mazeLayoutsBasePath = "out/production/omar-arharbi-packman/Layouts/";
-    File layoutsDirectory = new File(mazeLayoutsBasePath);
-    File[] filesInTheLayoutsDirectory;
+    private static final int WINDOW_WIDTH = 700;
+    private static final int WINDOW_HEIGHT = 700;
+    private static final String WINDOW_TITLE = "Pacman Game";
+
     private JComboBox<String> mazeLayoutsMenu;
-
-
+    private PanelPacmanGame panelPacmanGame;
 
     public ViewPacmanGame(PacmanGame pacmanGame){
-        super("Pacman Game");
+        super(WINDOW_TITLE);
+        initializeWindow();
+        initializePanelPacmanGame(pacmanGame);
+        initializeMazeLayoutsMenu();
+        addComponentsToWindow();
+    }
+
+    private void initializeWindow() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(700, 700);
-        PanelPacmanGame panelPacmanGame = new PanelPacmanGame(pacmanGame.getMaze());
-        this.add(panelPacmanGame);
+        this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    }
 
-        // adding a menu for changing the layouts
+    private void initializePanelPacmanGame(PacmanGame pacmanGame) {
+        panelPacmanGame = new PanelPacmanGame(pacmanGame.getMaze());
+    }
+
+    private void initializeMazeLayoutsMenu() {
         mazeLayoutsMenu = new JComboBox<>();
+    }
 
-        // menu content automation
-        filesInTheLayoutsDirectory = layoutsDirectory.listFiles();
-        if(filesInTheLayoutsDirectory != null) {
-            for (File file : filesInTheLayoutsDirectory) {
-                if (file.isFile() && file.getName().endsWith(".lay")) {
-                    String layFileWithOutExtension = file.getName().replaceFirst("[.][^.]+$", "");
-                    mazeLayoutsMenu.addItem(layFileWithOutExtension);
-                }
-            }
-        }
-
-        // Add ActionListener to the JComboBox
-        mazeLayoutsMenu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedLayout = (String) mazeLayoutsMenu.getSelectedItem();
-                String newMaze = mazeLayoutsBasePath + selectedLayout + ".lay";
-                try {
-                    Maze maze = new Maze(newMaze);
-                    panelPacmanGame.setMaze(maze);
-                    panelPacmanGame.repaint();
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
+    private void addComponentsToWindow() {
+        this.add(panelPacmanGame, BorderLayout.CENTER);
 
         JLabel menuLabel = new JLabel("Choose the maze layout :");
-
-        JPanel panelMenu = new JPanel();
-        panelMenu.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JPanel panelMenu = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelMenu.add(menuLabel);
         panelMenu.add(mazeLayoutsMenu);
 
@@ -63,4 +44,11 @@ public class ViewPacmanGame extends JFrame {
         this.setVisible(true);
     }
 
+    public JComboBox<String> getMazeLayoutsMenu() {
+        return mazeLayoutsMenu;
+    }
+
+    public PanelPacmanGame getPanelPacmanGame() {
+        return panelPacmanGame;
+    }
 }
