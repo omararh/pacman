@@ -1,10 +1,12 @@
 package Controller;
 import Model.Game.Game;
+import Vue.ViewCommand;
 
 public abstract class AbstractController {
     protected Game game;
     public AbstractController(Game game) {
         this.game = game;
+        ViewCommand viewCommand = new ViewCommand(this, game);
     }
     public void setTurnsBySecond(int time) {
         this.game.setTurnsBySecond(1000/time);

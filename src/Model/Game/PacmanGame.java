@@ -1,4 +1,5 @@
 package Model.Game;
+import Model.Agent.Agent;
 import Model.Agent.AgentFactory;
 import Model.Agent.GhostAgent;
 import Model.Agent.PacmanAgent;
@@ -23,7 +24,7 @@ public class PacmanGame extends Game {
         //pacman initialization
         pacman = AgentFactory.createPacman(this.maze.getPacman_start().get(0));
         //ghosts initialization
-
+        ghosts = AgentFactory.createGhosts(this.maze.getGhosts_start());
     }
     @Override
     protected void takeTurn() {
