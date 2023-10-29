@@ -65,14 +65,10 @@ public class ViewCommand implements Observer {
         text.setText("Turn : " + turn);
     }
     private void initButtons() {
-        Icon icon_restart = new ImageIcon(Objects.requireNonNull(getClass()
-                .getResource("/Icons/icon_restart.png")));
-        Icon icon_run = new ImageIcon(Objects.requireNonNull(getClass()
-                .getResource("/Icons/icon_run.png")));
-        Icon icon_step = new ImageIcon(Objects.requireNonNull(getClass()
-                .getResource("/Icons/icon_step.png")));
-        Icon icon_pause = new ImageIcon(Objects.requireNonNull(getClass()
-                .getResource("/Icons/icon_pause.png")));
+        Icon icon_restart = new ImageIcon("src/Icons/icon_restart.png");
+        Icon icon_run = new ImageIcon("src/Icons/icon_run.png");
+        Icon icon_step = new ImageIcon("src/Icons/icon_step.png");
+        Icon icon_pause = new ImageIcon("src/Icons/icon_pause.png");
 
         restartBtn = new JButton(icon_restart);
         runBtn = new JButton(icon_run);

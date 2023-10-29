@@ -1,7 +1,5 @@
 package Model.Game;
 
-import Model.Game.Game;
-
 public class SimpleGame extends Game {
 
     public  SimpleGame(int maxTurn) {
