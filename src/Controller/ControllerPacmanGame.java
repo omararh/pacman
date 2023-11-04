@@ -8,18 +8,18 @@ import java.io.File;
 
 public class ControllerPacmanGame extends AbstractController {
 
-    private final String mazeLayoutsBasePath = "out/production/omar-arharbi-packman/Layouts/";
+    private final String MAZE_LAYOUTS_BASE_PATH = "out/production/omar-arharbi-packman/Layouts/";
     private ViewPacmanGame viewPacmanGame;
 
     public ControllerPacmanGame(PacmanGame pacmanGame) {
-        super(pacmanGame);
+        super(pacmanGame);  
         this.viewPacmanGame = new ViewPacmanGame(pacmanGame);
         populateMazeLayoutsMenu();
         setupMazeLayoutsMenuListener();
     }
 
     private void populateMazeLayoutsMenu() {
-        File layoutsDirectory = new File(mazeLayoutsBasePath);
+        File layoutsDirectory = new File(MAZE_LAYOUTS_BASE_PATH);
         File[] filesInTheLayoutsDirectory = layoutsDirectory.listFiles();
         JComboBox<String> mazeLayoutsMenu = viewPacmanGame.getMazeLayoutsMenu();
 
@@ -37,7 +37,7 @@ public class ControllerPacmanGame extends AbstractController {
         JComboBox<String> mazeLayoutsMenu = viewPacmanGame.getMazeLayoutsMenu();
         mazeLayoutsMenu.addActionListener(e -> {
             String selectedLayout = (String) mazeLayoutsMenu.getSelectedItem();
-            String newMazePath = mazeLayoutsBasePath + selectedLayout + ".lay";
+            String newMazePath = MAZE_LAYOUTS_BASE_PATH + selectedLayout + ".lay";
             updateMaze(newMazePath);
         });
     }
