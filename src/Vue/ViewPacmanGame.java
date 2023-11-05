@@ -2,8 +2,10 @@ package Vue;
 import Model.Game.PacmanGame;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class ViewPacmanGame extends JFrame {
+public class ViewPacmanGame extends JFrame implements Observer {
     private static final int WINDOW_WIDTH = 700;
     private static final int WINDOW_HEIGHT = 700;
     private static final String WINDOW_TITLE = "Pacman Game";
@@ -17,11 +19,14 @@ public class ViewPacmanGame extends JFrame {
         initializePanelPacmanGame(pacmanGame);
         initializeMazeLayoutsMenu();
         addComponentsToWindow();
+        pacmanGame.addObserver(this);
     }
 
     private void initializeWindow() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        this.setFocusable(true);
+        this.requestFocusInWindow();
     }
 
     private void initializePanelPacmanGame(PacmanGame pacmanGame) {
@@ -50,5 +55,10 @@ public class ViewPacmanGame extends JFrame {
 
     public PanelPacmanGame getPanelPacmanGame() {
         return panelPacmanGame;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 }

@@ -69,4 +69,5 @@ public abstract class Game extends Observable implements Runnable {
         this.thread = new Thread(this);
         thread.start();
     }
+
 }

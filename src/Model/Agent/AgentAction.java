@@ -21,19 +21,19 @@ public class AgentAction {
 		// Calcul le vecteur de déplacement associé
 
 		switch (_direction) {
-		case NORTH:
+		case NORTH: // Top
 			_vx = 0;
 			_vy = -1;
 			break;
-		case SOUTH:
+		case SOUTH: // Bottom
 			_vx = 0;
 			_vy = 1;
 			break;
-		case EAST:
+		case EAST: // Right
 			_vx = 1;
 			_vy = 0;
 			break;
-		case WEST:
+		case WEST: // Left
 			_vx = -1;
 			_vy = 0;
 			break;

@@ -1,7 +1,7 @@
 package Model.Game;
 import Model.Agent.*;
-
 import java.util.List;
+
 public class PacmanGame extends Game {
     private Maze maze;
     public List<GhostAgent> ghosts;
@@ -9,8 +9,6 @@ public class PacmanGame extends Game {
     private int nbCapsule;
     private int nbFood;
     private int score;
-
-
     private static final int POINT_GUM = 10;
     private static final int POINT_FANTOM = 50;
     private static final int POINT_CAPSULE = 50;
@@ -20,6 +18,7 @@ public class PacmanGame extends Game {
     public PacmanGame(Maze maze, int maxTurn){
         super(maxTurn);
         this.maze = maze;
+        initializeGame();
     }
     public Maze getMaze() {
         return maze;
@@ -33,6 +32,9 @@ public class PacmanGame extends Game {
         pacman = AgentFactory.createPacman(this.maze.getPacman_start().get(0));
         //ghosts initialization
         ghosts = AgentFactory.createGhosts(this.maze.getGhosts_start());
+
+        this.score = 0;
+        System.out.println("\u001B[32m" + "pacman Started position " + pacman.getPosition() + "\u001B[0m");
     }
     @Override
     protected boolean gameContinue() {
@@ -44,7 +46,7 @@ public class PacmanGame extends Game {
      * @param AgentAction
      * @return boolean
      */
-    public boolean isLegalMove(Agent agent, AgentAction action) {
+    private boolean isLegalMove(Agent agent, AgentAction action) {
         if(!agent.isAlive()){
             return false;
         }
@@ -58,10 +60,15 @@ public class PacmanGame extends Game {
      * @param Agent
      * @param AgentAction
      */
-    public void moveAgent(Agent agent, AgentAction action) {
+    private void moveAgent(Agent agent, AgentAction action) {
+        if(! isLegalMove(agent, action)) {
+            System.out.println("\u001B[31m" + "Illegal move !!!" + "\u001B[0m");
+            return;
+        }
 
         int dirX = agent.getPosition().getX() + action.get_vx();
         int dirY = agent.getPosition().getY() + action.get_vy();
+
 
         agent.setPosition(new PositionAgent(dirX, dirY, action.get_direction()));
 
@@ -74,17 +81,16 @@ public class PacmanGame extends Game {
                 score+=POINT_CAPSULE;
                 nbCapsule--;
             }
+            System.out.println("\u001B[32m" + "Score : " + this.score + "\u001B[0m");
+            System.out.println("\u001B[33m" + "pacman position  : " + pacman.getPosition() + "\u001B[0m");
         }
     }
     @Override
     protected void takeTurn() {
-
+        AgentAction action = new AgentAction(3);
+        moveAgent(pacman, action);
     }
-
-
-
-
-
-
-
+    public void setPacmanAction(AgentAction action) {
+        moveAgent(pacman, action);
+    }
 }

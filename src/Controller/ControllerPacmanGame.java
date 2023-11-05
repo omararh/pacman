@@ -2,6 +2,8 @@ package Controller;
 import Model.Game.Maze;
 import Model.Game.PacmanGame;
 import Vue.ViewPacmanGame;
+import Model.Agent.AgentAction;
+
 
 import javax.swing.*;
 import java.io.File;
@@ -14,6 +16,8 @@ public class ControllerPacmanGame extends AbstractController {
     public ControllerPacmanGame(PacmanGame pacmanGame) {
         super(pacmanGame);  
         this.viewPacmanGame = new ViewPacmanGame(pacmanGame);
+        KeyboardEventListener keyboardEventListener = new KeyboardEventListener(this.viewPacmanGame, this);
+
         populateMazeLayoutsMenu();
         setupMazeLayoutsMenuListener();
     }
@@ -50,5 +54,20 @@ public class ControllerPacmanGame extends AbstractController {
         } catch (Exception ex) {
             throw new RuntimeException("Failed to update maze: " + ex.getMessage(), ex);
         }
+    }
+
+    public void setKey(char keyChar, boolean isPressed) {
+        if (!isPressed) {
+            return;
+        }
+        AgentAction action;
+        switch (keyChar) {
+            case 'w' -> action = new AgentAction(AgentAction.NORTH); // top
+            case 's' -> action = new AgentAction(AgentAction.SOUTH); // bottom
+            case 'a' -> action = new AgentAction(AgentAction.EAST);  // right
+            case 'd' -> action = new AgentAction(AgentAction.WEST);  // left
+            default -> action = new AgentAction(AgentAction.STOP);
+        }
+        ((PacmanGame) game).setPacmanAction(action);
     }
 }
