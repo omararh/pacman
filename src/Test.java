@@ -7,9 +7,9 @@ public class Test {
 
         // the originalClassic layout is the default used layout for the maze
         final String mazeDefaultLayout = "src/Layouts/originalClassic.lay";
-        Maze maze = new Maze(mazeDefaultLayout);
+        //Maze maze = new Maze(mazeDefaultLayout);
 
-        PacmanGame pacmanGame = new PacmanGame(maze, 50);
+        PacmanGame pacmanGame = new PacmanGame(mazeDefaultLayout, 50);
         ControllerPacmanGame controllerPacmanGame = new ControllerPacmanGame(pacmanGame);
     }
 }

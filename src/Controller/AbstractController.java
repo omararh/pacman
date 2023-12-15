@@ -1,9 +1,13 @@
 package Controller;
 import Model.Game.Game;
+import Model.Agent.Agent;
 import Vue.ViewCommand;
+
 
 public abstract class AbstractController {
     protected Game game;
+    public Agent agent;
+    private char lastKeyPressed;
     public AbstractController(Game game) {
         this.game = game;
         ViewCommand viewCommand = new ViewCommand(this, game);

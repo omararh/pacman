@@ -16,7 +16,6 @@ import java.awt.GridLayout;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
-import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 

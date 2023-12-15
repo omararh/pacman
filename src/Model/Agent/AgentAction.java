@@ -12,7 +12,7 @@ public class AgentAction {
 	public final static int STOP = 4;
 
 	// Direction
-	private int _direction;
+		private int _direction;
 
 	public AgentAction(int d) {
 

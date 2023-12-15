@@ -32,6 +32,8 @@ public class Maze implements Serializable, Cloneable {
 	private boolean walls[][];
 	private boolean food[][];
 	private boolean capsules[][];
+	private boolean initialFood[][];
+	private boolean initialCapsules[][];
 
 	/**
 	 * Les positions initiales des agents
@@ -122,6 +124,15 @@ public class Maze implements Serializable, Cloneable {
 				if (!walls[size_x - 1][y])
 					throw new Exception("Wrong input format: the maze must be closed");
 			System.out.println("### Maze loaded.");
+
+			initialFood = new boolean[size_x][size_y];
+			initialCapsules = new boolean[size_x][size_y];
+			for (int x = 0; x < size_x; x++) {
+				for (int z = 0; z < size_y; z++) {
+					initialFood[x][z] = food[x][z];
+					initialCapsules[x][z] = capsules[x][z];
+				}
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -252,4 +263,15 @@ public class Maze implements Serializable, Cloneable {
 		return (Maze) super.clone();
 	}
 
+	/*
+	 * reinitialize food and capsules
+	 */
+	public void resetFoodsAndCapsules() {
+		for (int x = 0; x < size_x; x++) {
+			for (int y = 0; y < size_y; y++) {
+				food[x][y] = initialFood[x][y];
+				capsules[x][y] = initialCapsules[x][y];
+			}
+		}
+	}
 }

@@ -1,4 +1,5 @@
 package Controller;
+import Model.Agent.Agent;
 import Model.Game.Maze;
 import Model.Game.PacmanGame;
 import Vue.ViewPacmanGame;
@@ -8,16 +9,15 @@ import Model.Agent.AgentAction;
 import javax.swing.*;
 import java.io.File;
 
-public class ControllerPacmanGame extends AbstractController {
 
+public class ControllerPacmanGame extends AbstractController {
     private final String MAZE_LAYOUTS_BASE_PATH = "out/production/omar-arharbi-packman/Layouts/";
     private ViewPacmanGame viewPacmanGame;
 
     public ControllerPacmanGame(PacmanGame pacmanGame) {
-        super(pacmanGame);  
+        super(pacmanGame);
         this.viewPacmanGame = new ViewPacmanGame(pacmanGame);
         KeyboardEventListener keyboardEventListener = new KeyboardEventListener(this.viewPacmanGame, this);
-
         populateMazeLayoutsMenu();
         setupMazeLayoutsMenuListener();
     }
@@ -51,11 +51,17 @@ public class ControllerPacmanGame extends AbstractController {
             Maze maze = new Maze(mazePath);
             viewPacmanGame.getPanelPacmanGame().setMaze(maze);
             viewPacmanGame.getPanelPacmanGame().repaint();
+            this.restart();
         } catch (Exception ex) {
             throw new RuntimeException("Failed to update maze: " + ex.getMessage(), ex);
         }
     }
-
+    /*
+     * defining what the entry keys signifies for the model
+     * @param char keyChar
+     * @param boolean isPressed
+     * @return AgentAction
+     */
     public void setKey(char keyChar, boolean isPressed) {
         if (!isPressed) {
             return;

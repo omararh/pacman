@@ -1,8 +1,10 @@
 package Model.Game;
 import Vue.ViewCommand;
+
+import java.io.Serializable;
 import java.util.Observable;
 
-public abstract class Game extends Observable implements Runnable {
+public abstract class Game extends Observable implements Runnable, Serializable {
     protected int turn;
     protected int maxTurn;
     protected boolean isRunning = false;
@@ -40,8 +42,8 @@ public abstract class Game extends Observable implements Runnable {
         if(this.turn < this.maxTurn && isFinished){
             turn++;
             setChanged();
-            notifyObservers(turn);
             this.takeTurn();
+            notifyObservers(turn);
             return;
         }
 

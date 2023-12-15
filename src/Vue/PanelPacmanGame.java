@@ -188,7 +188,6 @@ public class PanelPacmanGame extends JPanel {
 	
 			g.setColor(Color.black);
 		}
-
 	}
 
 	public Maze getMaze(){
@@ -218,6 +217,4 @@ public class PanelPacmanGame extends JPanel {
 	public void setGhosts_pos(ArrayList<PositionAgent> ghosts_pos) {
 		this.ghosts_pos = ghosts_pos;
 	}
-
-	
 }
