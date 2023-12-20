@@ -75,9 +75,10 @@ public class ViewPacmanGame extends JFrame implements Observer {
         updateGhostsPosition(game);
         updateMazeState(game);
         this.scoreToBeDisplayedInUI = game.getScore();
-        scoreLabel.setForeground(Color.RED);
+        scoreLabel.setForeground(Color.GREEN);
         scoreLabel.setText("Score: " + this.scoreToBeDisplayedInUI);
         panelPacmanGame.repaint();
+        //System.out.println("state --> " + game.getGameState());
     }
 
     private void updatePacmanPosition(PacmanGame game) {

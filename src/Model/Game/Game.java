@@ -5,23 +5,30 @@ import java.io.Serializable;
 import java.util.Observable;
 
 public abstract class Game extends Observable implements Runnable, Serializable {
+
     protected int turn;
     protected int maxTurn;
     protected boolean isRunning = false;
     protected Thread thread;
     protected long nbTurnsBySecond;
-    public int getTurn() {
-        return turn;
-    }
+
     public Game(int maxTurn) {
         this.maxTurn = maxTurn;
         this.nbTurnsBySecond = 1000/ ViewCommand.slider_init;
         this.turn = 0;
     }
+
+    public int getTurn() {
+        return turn;
+    }
+
+
     public void setTurnsBySecond(int nbTurns) {
         this.nbTurnsBySecond = nbTurns;
     }
+
     protected abstract void initializeGame();
+
     public void init(){
         turn = 0;
         this.isRunning = false;
@@ -29,8 +36,11 @@ public abstract class Game extends Observable implements Runnable, Serializable 
         setChanged();
         notifyObservers(turn);
     }
+
     protected abstract void takeTurn();
+
     protected abstract boolean gameContinue();
+
     protected void gameOver(){
         this.isRunning = false;
     }
@@ -50,11 +60,13 @@ public abstract class Game extends Observable implements Runnable, Serializable 
         this.isRunning = false;
         this.gameOver();
     }
+
     public void pause() {
         this.isRunning = false;
         setChanged();
         notifyObservers(turn);
     }
+
     @SuppressWarnings("BusyWait")
     public void run() {
         while (this.isRunning) {
@@ -66,10 +78,10 @@ public abstract class Game extends Observable implements Runnable, Serializable 
             }
         }
     }
+
     public void launch() {
         this.isRunning = true;
         this.thread = new Thread(this);
         thread.start();
     }
-
 }

@@ -9,7 +9,7 @@ public class Test {
         final String mazeDefaultLayout = "src/Layouts/originalClassic.lay";
         //Maze maze = new Maze(mazeDefaultLayout);
 
-        PacmanGame pacmanGame = new PacmanGame(mazeDefaultLayout, 50);
+        PacmanGame pacmanGame = new PacmanGame(mazeDefaultLayout, 1000);
         ControllerPacmanGame controllerPacmanGame = new ControllerPacmanGame(pacmanGame);
     }
 }

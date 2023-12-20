@@ -1,67 +1,85 @@
 package Model.Game;
 import Model.Agent.*;
+import Model.Strategies.SimpleGhostStrategy;
+import Model.Strategies.SimplePacmanStrategy;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class PacmanGame extends Game {
     private Maze maze;
-    public List<GhostAgent> ghosts;
-    public PacmanAgent pacman;
+    public List<Agent> ghosts;
+    public Agent pacman;
     private int nbCapsule;
     private int nbFood;
     private int score;
-    private static final int POINT_GUM = 10;
+
+
+    private static final int GUM_NB_POINT = 10;
     private static final int POINT_FANTOM = 50;
-    private static final int POINT_CAPSULE = 50;
+    private static final int CAPSULE_NB_POINT = 50;
     private static final int POINT_DEAD = -100;
     private static final int POINT_WIN = 100;
 
+    /**
+     * Constructor for PacmanGame.
+     * @param mazeFile String representing the file path of the maze.
+     * @param maxTurn Maximum number of turns for the game.
+     * @throws Exception if the maze file cannot be read or is invalid.
+     */
     public PacmanGame(String mazeFile, int maxTurn) throws Exception {
         super(maxTurn);
         this.maze = new Maze(mazeFile);
 
+
         initializeGame();
     }
+
     public int getScore() {
         return score;
     }
+
     public Maze getMaze() {
         return maze;
     }
+
     public void setMaze(Maze maze) {
         this.maze = maze;
     }
+
     @Override
-    protected void initializeGame()  {
-        //if (this.pacman == null) {
+    protected void initializeGame() {
+        try {
             this.pacman = AgentFactory.createPacman(this.maze.getPacman_start().get(0));
+            this.pacman.setMouvementStrategy(new SimplePacmanStrategy(this));
             this.ghosts = AgentFactory.createGhosts(this.maze.getGhosts_start());
-        //}else {
             this.maze.resetFoodsAndCapsules();
-        //}
-        // in case if we restart :
-        // we have to make the ghosts alive again and pacman also +
-        for(Agent ghost : this.ghosts){
-            ghost.setAlive(true);
+
+            // In case we restart, make pacman alive and set the agents position to their initial position
+            this.pacman.setAlive(true);
+            this.pacman.setPosition(this.pacman.getInitialPosition());
+            for(Agent ghost : ghosts) {
+                ghost.setPosition(ghost.getInitialPosition());
+                // change the ghosts strategy to simple
+                ghost.setMouvementStrategy(new SimpleGhostStrategy(this));
+            }
+
+            this.score = 0;
+            this.nbFood = getNbFood(this.maze);
+            this.nbCapsule = getNbCapsule(this.maze);
+
+            System.out.println("\u001B[32m" + "Pacman started position " +
+                    pacman.getPosition() + "\u001B[0m");
+        } catch (Exception e) {
+            System.out.println("Error initializing game: " + e.getMessage());
         }
-        this.pacman.setAlive(true);
-
-        // set there position into the initial positions
-        this.pacman.setPosition(this.pacman.getInitialPosition());
-        for(Agent ghost : ghosts) {
-            ghost.setPosition(ghost.getInitialPosition());
-        }
-
-        this.score = 0;
-        this.nbFood = countFoods(this.maze);
-        this.nbCapsule = countCapsules(this.maze);
-
-        System.out.println("\u001B[32m" + "pacman Started position " +
-                pacman.getPosition() + "\u001B[0m");
     }
-    public int countFoods(Maze maze) {
+
+    /**
+     * Calculates the number of food in the maze.
+     * @param maze The Maze object.
+     * @return int Number of food.
+     */
+    public int getNbFood(Maze maze) {
         int nb = 0;
         for(int i =0; i < maze.getSizeX(); i++) {
             for(int j =0; j < maze.getSizeY(); j++) {
@@ -73,7 +91,12 @@ public class PacmanGame extends Game {
         return nb;
     }
 
-    public int countCapsules(Maze maze) {
+    /**
+     * Calculates the number of capsules in the maze.
+     * @param maze The Maze object.
+     * @return int Number of capsules.
+     */
+    public int getNbCapsule(Maze maze) {
         int nb = 0;
         for(int i =0; i < maze.getSizeX(); i++) {
             for(int j =0; j < maze.getSizeY(); j++) {
@@ -89,13 +112,14 @@ public class PacmanGame extends Game {
     protected boolean gameContinue() {
         return true;
     }
-    /*
-     * check if the agent can make the move
-     * @param Agent
-     * @param AgentAction
-     * @return boolean
+
+    /**
+     * Checks if the move for a given agent is legal.
+     * @param agent The agent making the move.
+     * @param action The action being attempted.
+     * @return boolean True if the move is legal, false otherwise.
      */
-    private boolean isLegalMove(Agent agent, AgentAction action) {
+    public boolean isLegalMove(Agent agent, AgentAction action) {
         if(!agent.isAlive()){
             return false;
         }
@@ -104,10 +128,11 @@ public class PacmanGame extends Game {
 
         return !maze.isWall(dirX, dirY);
     }
-    /*
-     * update the position
-     * @param Agent
-     * @param AgentAction
+
+    /**
+     * Updates the position of an agent based on the given action.
+     * @param agent The agent who will move.
+     * @param action The action to perform for this move.
      */
     private void moveAgent(Agent agent, AgentAction action) {
         if(! isLegalMove(agent, action)) {
@@ -122,67 +147,43 @@ public class PacmanGame extends Game {
         agent.setPosition(new PositionAgent(dirX, dirY, action.get_direction()));
 
 
-        if(agent instanceof PacmanAgent) {
+        if(agent.getAgentType() == TypeOfAgent.PACMAN) {
             if(maze.isFood(dirX, dirY)){
-                score+=POINT_GUM;
+                score+=GUM_NB_POINT;
+                maze.setFood(dirX, dirY, false);
                 nbFood--;
             }
             if(maze.isCapsule(dirX, dirY)){
-                score+=POINT_CAPSULE;
+                score+=CAPSULE_NB_POINT;
+                maze.setCapsule(dirX, dirY, false);
                 nbCapsule--;
+                // setting the strategies for the ghosts to the FrightenedModeStrategy
+
             }
             System.out.println("\u001B[32m" + "Score : " + this.score + "\u001B[0m");
             System.out.println("\u001B[33m" + "pacman position  : " + pacman.getPosition() + "\u001B[0m");
         }
     }
+
     @Override
     protected void takeTurn() {
-        AgentAction action = getAgentRandomAction(pacman, maze);
-        System.out.println("\u001B[33m" + "randomly chosen direction : " + action.get_direction() + "\u001B[0m");
+        AgentAction action = pacman.decideNextAction(this);
+        System.out.println("\u001B[33m" + "randomly chosen direction for pacman : " + action.get_direction() + "\u001B[0m");
         moveAgent(pacman, action);
-
         moveGhosts();
     }
+
     private void moveGhosts() {
         for(Agent ghost : this.ghosts) {
-            AgentAction ghostAction = getAgentRandomAction(ghost, maze);
+            AgentAction ghostAction = ghost.decideNextAction(this);
             moveAgent(ghost, ghostAction);
         }
-
     }
-    public void setPacmanAction(AgentAction action) {
+
+    public void setPacmanActionByKeyBoard(AgentAction action) {
         moveAgent(pacman, action);
         moveGhosts();
         setChanged();
         notifyObservers(turn);
     }
-     /*
-     * return a random valid action
-     * @param agent
-     * @param maze
-     * @return AgentPosition
-     */
-     private AgentAction getAgentRandomAction(Agent agent, Maze maze) {
-         Random random = new Random();
-         ArrayList<AgentAction> actions = new ArrayList<>();
-
-         if (!maze.isWall(agent.getPosition().getX(), agent.getPosition().getY() - 1)) {
-             actions.add(new AgentAction(Maze.NORTH));
-         }
-         if (!maze.isWall(agent.getPosition().getX(), agent.getPosition().getY() + 1)) {
-             actions.add(new AgentAction(Maze.SOUTH));
-         }
-         if (!maze.isWall(agent.getPosition().getX() + 1, agent.getPosition().getY())) {
-             actions.add(new AgentAction(Maze.EAST));
-         }
-         if (!maze.isWall(agent.getPosition().getX() - 1, agent.getPosition().getY())) {
-             actions.add(new AgentAction(Maze.WEST));
-         }
-
-         if (actions.size() > 0) {
-             return actions.get(random.nextInt(actions.size()));
-         } else {
-             return new AgentAction(Maze.STOP);
-         }
-     }
 }

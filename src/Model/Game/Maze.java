@@ -209,6 +209,7 @@ public class Maze implements Serializable, Cloneable {
 		return (ghosts_start.size());
 	}
 
+	// return a list of positions (we can have more than one pacman)
 	public ArrayList<PositionAgent> getPacman_start() {
 		return pacman_start;
 	}

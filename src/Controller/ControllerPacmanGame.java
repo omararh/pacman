@@ -1,5 +1,4 @@
 package Controller;
-import Model.Agent.Agent;
 import Model.Game.Maze;
 import Model.Game.PacmanGame;
 import Vue.ViewPacmanGame;
@@ -51,13 +50,14 @@ public class ControllerPacmanGame extends AbstractController {
             Maze maze = new Maze(mazePath);
             viewPacmanGame.getPanelPacmanGame().setMaze(maze);
             viewPacmanGame.getPanelPacmanGame().repaint();
+            ((PacmanGame) game).setMaze(maze);
             this.restart();
         } catch (Exception ex) {
             throw new RuntimeException("Failed to update maze: " + ex.getMessage(), ex);
         }
     }
     /*
-     * defining what the entry keys signifies for the model
+     * defining what the entry keys are signifying for the model
      * @param char keyChar
      * @param boolean isPressed
      * @return AgentAction
@@ -74,6 +74,6 @@ public class ControllerPacmanGame extends AbstractController {
             case 'd' -> action = new AgentAction(AgentAction.WEST);  // left
             default -> action = new AgentAction(AgentAction.STOP);
         }
-        ((PacmanGame) game).setPacmanAction(action);
+        ((PacmanGame) game).setPacmanActionByKeyBoard(action);
     }
 }

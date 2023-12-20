@@ -2,6 +2,7 @@ package Vue;
 
 import Controller.AbstractController;
 import Model.Game.Game;
+import Model.Game.PacmanGame;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -186,6 +187,12 @@ public class ViewCommand implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         setTurn((int) arg);
+        PacmanGame game = (PacmanGame) o;
+
+        //this will be useful for the keyboard strategy :
+        // if game.score > 0 && state == start && strategy == "keyboard
+        // we should activate run, stop and restart
+        // if we click in "run or step" buttons we will change strategy for pacman to random
     }
 }
 
