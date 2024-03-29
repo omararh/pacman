@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f9c7b53c-40db-4981-b544-232f3c0f856b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../omar-arharbi-packman2.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Controller/AbstractController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Controller/AbstractController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Controller/ControllerPacmanGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Controller/ControllerPacmanGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Controller/KeyboardEventListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Controller/KeyboardEventListener$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Layouts/originalClassic.lay" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Layouts/originalClassic.lay" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Layouts/originalClassic_oneFood_fivePacmans.lay" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Layouts/smallClassic.lay" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Layouts/smallMaze.lay" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Layouts/testClassic-1.lay" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Layouts/testSearch.lay" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Model/Agent/Agent.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Model/Agent/Agent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Model/Game/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Model/Game/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Model/Game/Maze.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Model/Game/Maze.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Model/Game/PacmanGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Model/Game/PacmanGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Model/Game/SimpleGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Model/Game/SimpleGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Model/Strategies/MouvementStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Model/Strategies/RandomStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Model/Strategies/SimpleGhostStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Model/Strategies/SimplePacmanStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Test.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Vue/PanelPacmanGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Vue/PanelPacmanGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Vue/ViewCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Vue/ViewCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Vue/ViewPacmanGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Vue/ViewPacmanGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Vue/ViewSimpleGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/omar-arharbi-packman/Vue/ViewSimpleGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Controller/AbstractController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Controller/AbstractController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Controller/ControllerPacmanGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Controller/ControllerPacmanGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Controller/KeyboardEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Controller/KeyboardEventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Icons/pacman-game-over-prints.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Icons/pacman-game-over-prints.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Layouts/originalClassic.lay" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Layouts/originalClassic.lay" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Model/Agent/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Model/Agent/Agent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Model/Agent/AgentState.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Model/Agent/AgentState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Model/Agent/Strategies/GhostToPacmanStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Model/Agent/Strategies/GhostToPacmanStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Model/Agent/Strategies/GhostsFrightenedModeStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Model/Agent/Strategies/GhostsFrightenedModeStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Model/Agent/Strategies/KeyBoardControlStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Model/Agent/Strategies/KeyBoardControlStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Model/Agent/Strategies/MouvementStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Model/Agent/Strategies/MouvementStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Model/Agent/Strategies/PacmanToFoodStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Model/Agent/Strategies/PacmanToFoodStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Model/Agent/Strategies/RandomStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Model/Agent/Strategies/RandomStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Model/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Model/Game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Model/Game/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Model/Game/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Model/Game/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Model/Game/Maze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Model/Game/PacmanGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Model/Game/PacmanGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Model/Game/SimpleGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Model/Game/SimpleGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Vue/PanelPacmanGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Vue/PanelPacmanGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Vue/ViewCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Vue/ViewCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Vue/ViewPacmanGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Vue/ViewPacmanGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Vue/ViewSimpleGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Vue/ViewSimpleGame.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="OpenAPI" />
+        <option value="Enum" />
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar:///Library/Java/JavaVirtualMachines/jdk-15.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Runnable.java" root0="SKIP_INSPECTION" />
+    <setting file="jar:///Library/Java/JavaVirtualMachines/jdk-15.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/RuntimeException.java" root0="SKIP_INSPECTION" />
+    <setting file="jar:///Library/Java/JavaVirtualMachines/jdk-15.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Thread.java" root0="SKIP_INSPECTION" />
+    <setting file="jar:///Library/Java/JavaVirtualMachines/jdk-15.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/util/Observable.java" root0="SKIP_INSPECTION" />
+    <setting file="jar:///Library/Java/JavaVirtualMachines/jdk-15.0.2.jdk/Contents/Home/lib/src.zip!/java.desktop/java/awt/Component.java" root0="SKIP_INSPECTION" />
+    <setting file="jar:///Library/Java/JavaVirtualMachines/jdk-15.0.2.jdk/Contents/Home/lib/src.zip!/java.desktop/javax/swing/JFrame.java" root0="SKIP_INSPECTION" />
+    <setting file="jar:///Library/Java/JavaVirtualMachines/jdk-15.0.2.jdk/Contents/Home/lib/src.zip!/java.desktop/javax/swing/JLabel.java" root0="SKIP_INSPECTION" />
+    <setting file="jar:///Library/Java/JavaVirtualMachines/jdk-15.0.2.jdk/Contents/Home/lib/src.zip!/java.desktop/javax/swing/JSlider.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2VeQfsnmQGqlbIqfRelYRKIjA0Y" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/omararharbi/IdeaProjects/omar-arharbi-packman/omar-arharbi-packman&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Console Colors&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Layouts" />
+      <recent name="$PROJECT_DIR$/src/Icons" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/Model/SourceElements" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.MainClient">
+    <configuration name="MainClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test.MainClient" />
+      <module name="omar-arharbi-packman" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test.Test" />
+      <module name="omar-arharbi-packman" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="SwaggerCodegen">
+      <option name="activeConfigurationType" value="FILE" />
+      <option name="configurationPath" value="" />
+      <option name="customJreEnabled" value="false" />
+      <option name="customTemplatesPath" value="" />
+      <option name="enableDebugLogging" value="false" />
+      <option name="generateToPath" value="$PROJECT_DIR$/gen" />
+      <option name="generationParameters">
+        <list />
+      </option>
+      <option name="generatorPath" value="https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.0.0/openapi-generator-cli-5.0.0.jar" />
+      <option name="jdkPath" value="" />
+      <option name="language" value="java" />
+      <option name="specificationPath" value="$PROJECT_DIR$/src/hello.json" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainClient" />
+        <item itemvalue="Application.Test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f9c7b53c-40db-4981-b544-232f3c0f856b" name="Changes" comment="" />
+      <created>1695194172420</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695194172420</updated>
+      <workItem from="1695194173554" duration="24979000" />
+      <workItem from="1695398085318" duration="1463000" />
+      <workItem from="1695568746407" duration="16502000" />
+      <workItem from="1696010511351" duration="16448000" />
+      <workItem from="1696182084147" duration="100787000" />
+      <workItem from="1697400828876" duration="1448000" />
+      <workItem from="1697490336369" duration="601000" />
+      <workItem from="1698344254690" duration="37647000" />
+      <workItem from="1699111465296" duration="70817000" />
+      <workItem from="1699442282418" duration="766000" />
+      <workItem from="1702640096524" duration="143983000" />
+      <workItem from="1707149301728" duration="15966000" />
+      <workItem from="1709062774039" duration="699000" />
+      <workItem from="1710380497132" duration="4087000" />
+      <workItem from="1710536248954" duration="2649000" />
+      <workItem from="1710792930760" duration="2039000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.Exception" package="java.lang" />
+          <option name="timeStamp" value="4" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

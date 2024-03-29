@@ -1,4 +1,5 @@
 package Controller;
+import Model.Agent.Strategies.KeyBoardControlStrategy;
 import Model.Game.Maze;
 import Model.Game.PacmanGame;
 import Vue.ViewPacmanGame;
@@ -9,7 +10,7 @@ import javax.swing.*;
 import java.io.File;
 
 
-public class ControllerPacmanGame extends AbstractController {
+public class ControllerPacmanGame extends AbstractController implements PacmanGameActions {
     private final String MAZE_LAYOUTS_BASE_PATH = "out/production/omar-arharbi-packman/Layouts/";
     private ViewPacmanGame viewPacmanGame;
 
@@ -49,8 +50,8 @@ public class ControllerPacmanGame extends AbstractController {
         try {
             Maze maze = new Maze(mazePath);
             viewPacmanGame.getPanelPacmanGame().setMaze(maze);
-            viewPacmanGame.getPanelPacmanGame().repaint();
             ((PacmanGame) game).setMaze(maze);
+            viewPacmanGame.requestFocus();
             this.restart();
         } catch (Exception ex) {
             throw new RuntimeException("Failed to update maze: " + ex.getMessage(), ex);
@@ -62,10 +63,11 @@ public class ControllerPacmanGame extends AbstractController {
      * @param boolean isPressed
      * @return AgentAction
      */
-    public void setKey(char keyChar, boolean isPressed) {
-        if (!isPressed) {
+    public void handleKeyboardMovement(char keyChar, boolean isPressed) {
+        if(!isPressed){
             return;
         }
+
         AgentAction action;
         switch (keyChar) {
             case 'w' -> action = new AgentAction(AgentAction.NORTH); // top
@@ -74,6 +76,8 @@ public class ControllerPacmanGame extends AbstractController {
             case 'd' -> action = new AgentAction(AgentAction.WEST);  // left
             default -> action = new AgentAction(AgentAction.STOP);
         }
-        ((PacmanGame) game).setPacmanActionByKeyBoard(action);
+        // move the pacman
+        ((PacmanGame) game).pacman.setMouvementStrategy(new KeyBoardControlStrategy((PacmanGame) game, action));
+        // move the ghosts
     }
 }

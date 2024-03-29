@@ -1,20 +1,20 @@
 package Model.Agent;
 
 import Model.Game.PacmanGame;
-import Model.Strategies.MouvementStrategy;
+import Model.Agent.Strategies.MouvementStrategy;
 
 public class Agent {
     private PositionAgent position;
-    private boolean isAlive;
     private PositionAgent initialPosition;
     private TypeOfAgent agentType;
     private MouvementStrategy mouvementStrategy;
+    private AgentState agentState;
 
     public Agent(PositionAgent position, TypeOfAgent agentType) {
         this.position = position;
-        this.isAlive = true;
         this.initialPosition = position;
         this.agentType = agentType;
+        this.agentState = AgentState.ALIVE;
     }
     public void setPosition(PositionAgent position) {
         this.position = position;
@@ -28,20 +28,24 @@ public class Agent {
         return agentType;
     }
 
-    public boolean isAlive() {
-        return isAlive;
+    public AgentState getAgentState() {
+        return this.agentState;
     }
 
     public PositionAgent getInitialPosition() {
         return initialPosition;
     }
 
-    public void setAlive(boolean isAlive) {
-        this.isAlive = isAlive;
+    public MouvementStrategy getMouvementStrategy() {
+        return mouvementStrategy;
     }
 
     public void setMouvementStrategy(MouvementStrategy mouvementStrategy) {
         this.mouvementStrategy = mouvementStrategy;
+    }
+
+    public void setAgentState(AgentState state) {
+        this.agentState = state;
     }
 
     public AgentAction decideNextAction(PacmanGame pacmanGame) {

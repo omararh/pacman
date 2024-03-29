@@ -191,6 +191,8 @@ public class Maze implements Serializable, Cloneable {
 	}
 
 
+
+
 	/**
 	 * Renvoie le nombre de pacmans
 	 *

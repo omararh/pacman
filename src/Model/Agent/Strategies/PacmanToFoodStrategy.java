@@ -10,11 +10,11 @@ import Model.Game.PacmanGame;
 import java.util.ArrayList;
 
 // ------- In this strategy pacman will be trying to search for the food/capsule -------------- //
-public class SimplePacmanStrategy extends MouvementStrategy {
+public class PacmanToFoodStrategy extends MouvementStrategy {
 
     private PositionAgent lastPosition = null;
 
-    public SimplePacmanStrategy(PacmanGame game) {
+    public PacmanToFoodStrategy(PacmanGame game) {
         super(game);
     }
 

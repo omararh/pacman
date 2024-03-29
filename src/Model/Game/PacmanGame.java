@@ -1,7 +1,6 @@
 package Model.Game;
 import Model.Agent.*;
-import Model.Strategies.SimpleGhostStrategy;
-import Model.Strategies.SimplePacmanStrategy;
+import Model.Agent.Strategies.*;
 
 import java.util.List;
 
@@ -12,13 +11,11 @@ public class PacmanGame extends Game {
     private int nbCapsule;
     private int nbFood;
     private int score;
+    private int frightenedModeStartTurn = 0;
 
 
     private static final int GUM_NB_POINT = 10;
-    private static final int POINT_FANTOM = 50;
     private static final int CAPSULE_NB_POINT = 50;
-    private static final int POINT_DEAD = -100;
-    private static final int POINT_WIN = 100;
 
     /**
      * Constructor for PacmanGame.
@@ -50,17 +47,17 @@ public class PacmanGame extends Game {
     protected void initializeGame() {
         try {
             this.pacman = AgentFactory.createPacman(this.maze.getPacman_start().get(0));
-            this.pacman.setMouvementStrategy(new SimplePacmanStrategy(this));
+            this.pacman.setMouvementStrategy(new PacmanToFoodStrategy(this));
+
             this.ghosts = AgentFactory.createGhosts(this.maze.getGhosts_start());
             this.maze.resetFoodsAndCapsules();
 
             // In case we restart, make pacman alive and set the agents position to their initial position
-            this.pacman.setAlive(true);
+            this.pacman.setAgentState(AgentState.ALIVE);
             this.pacman.setPosition(this.pacman.getInitialPosition());
             for(Agent ghost : ghosts) {
                 ghost.setPosition(ghost.getInitialPosition());
-                // change the ghosts strategy to simple
-                ghost.setMouvementStrategy(new SimpleGhostStrategy(this));
+                ghost.setMouvementStrategy(new RandomStrategy(this));
             }
 
             this.score = 0;
@@ -110,7 +107,14 @@ public class PacmanGame extends Game {
 
     @Override
     protected boolean gameContinue() {
-        return true;
+        return ((nbFood > 0 || nbCapsule > 0) && !(pacman.getAgentState() == AgentState.DEAD));
+    }
+
+    @Override
+    protected void gameOver(){
+        if(nbFood == 0 && nbCapsule == 0 && !(pacman.getAgentState() == AgentState.DEAD)){
+            this.currentState = GameState.VICTORY;
+        }
     }
 
     /**
@@ -120,9 +124,6 @@ public class PacmanGame extends Game {
      * @return boolean True if the move is legal, false otherwise.
      */
     public boolean isLegalMove(Agent agent, AgentAction action) {
-        if(!agent.isAlive()){
-            return false;
-        }
         int dirX = agent.getPosition().getX() + action.get_vx();
         int dirY = agent.getPosition().getY() + action.get_vy();
 
@@ -146,44 +147,64 @@ public class PacmanGame extends Game {
 
         agent.setPosition(new PositionAgent(dirX, dirY, action.get_direction()));
 
-
-        if(agent.getAgentType() == TypeOfAgent.PACMAN) {
+        if (agent.getAgentType() == TypeOfAgent.PACMAN ) {
             if(maze.isFood(dirX, dirY)){
                 score+=GUM_NB_POINT;
                 maze.setFood(dirX, dirY, false);
                 nbFood--;
             }
-            if(maze.isCapsule(dirX, dirY)){
-                score+=CAPSULE_NB_POINT;
+            if(maze.isCapsule(dirX, dirY)) {
+                score += CAPSULE_NB_POINT;
                 maze.setCapsule(dirX, dirY, false);
                 nbCapsule--;
-                // setting the strategies for the ghosts to the FrightenedModeStrategy
+                frightenedModeStartTurn = this.turn;
 
+                for (Agent ghost : ghosts) {
+                    ghost.setMouvementStrategy(new GhostsFrightenedModeStrategy(this));
+                    ghost.setAgentState(AgentState.SCARED);
+                }
+                // System.out.println("\u001B[32m" + "Score : " + this.score + "\u001B[0m");
+                // System.out.println("\u001B[33m" + "pacman position  : " + pacman.getPosition() + "\u001B[0m");
             }
-            System.out.println("\u001B[32m" + "Score : " + this.score + "\u001B[0m");
-            System.out.println("\u001B[33m" + "pacman position  : " + pacman.getPosition() + "\u001B[0m");
         }
     }
 
     @Override
     protected void takeTurn() {
         AgentAction action = pacman.decideNextAction(this);
-        System.out.println("\u001B[33m" + "randomly chosen direction for pacman : " + action.get_direction() + "\u001B[0m");
+        //System.out.println("\u001B[33m" + "chosen direction for pacman : " + action.get_direction() + "\u001B[0m");
         moveAgent(pacman, action);
-        moveGhosts();
-    }
 
-    private void moveGhosts() {
         for(Agent ghost : this.ghosts) {
             AgentAction ghostAction = ghost.decideNextAction(this);
             moveAgent(ghost, ghostAction);
         }
+
+        if (frightenedModeStartTurn != 0 && this.turn - frightenedModeStartTurn >= 20) {
+            resetGhostStrategies();
+            frightenedModeStartTurn = 0;
+        }
+
+        if(isPacmanCollidingWithGhost()){
+            this.currentState = GameState.GAME_OVER;
+            this.pacman.setAgentState(AgentState.DEAD);
+            System.out.println("pacman State --> " + this.pacman.getAgentState());
+        }
     }
 
-    public void setPacmanActionByKeyBoard(AgentAction action) {
-        moveAgent(pacman, action);
-        moveGhosts();
-        setChanged();
-        notifyObservers(turn);
+    private void resetGhostStrategies() {
+        for (Agent ghost : ghosts) {
+            ghost.setMouvementStrategy(new GhostToPacmanStrategy(this));
+            ghost.setAgentState(AgentState.ALIVE);
+        }
+    }
+
+    private boolean isPacmanCollidingWithGhost() {
+        for (Agent ghost : ghosts) {
+            if (ghost.getPosition().getX() == pacman.getPosition().getX() && ghost.getPosition().getY() == pacman.getPosition().getY()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

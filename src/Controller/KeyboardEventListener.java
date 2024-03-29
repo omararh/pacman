@@ -19,14 +19,13 @@ public class KeyboardEventListener {
             }
             @Override
             public void keyPressed(KeyEvent e) {
-                pacmanGameController.setKey(e.getKeyChar(), true);
+                pacmanGameController.handleKeyboardMovement(e.getKeyChar(), true);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                pacmanGameController.setKey(e.getKeyChar(), false);
+                pacmanGameController.handleKeyboardMovement(e.getKeyChar(), false);
             }
         });
     }
-
 }

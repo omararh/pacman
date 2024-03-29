@@ -17,4 +17,9 @@ public class SimpleGame extends Game {
     protected boolean gameContinue() {
         return true;
     }
+
+    @Override
+    protected void gameOver() {
+
+    }
 }

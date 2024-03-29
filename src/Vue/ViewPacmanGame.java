@@ -1,5 +1,6 @@
 package Vue;
 import Model.Agent.Agent;
+import Model.Agent.AgentState;
 import Model.Agent.PositionAgent;
 import Model.Game.PacmanGame;
 import javax.swing.*;
@@ -15,6 +16,7 @@ public class ViewPacmanGame extends JFrame implements Observer {
 
     private JComboBox<String> mazeLayoutsMenu;
     private JLabel scoreLabel;
+    private JLabel isFrightenedMode;
     private PanelPacmanGame panelPacmanGame;
     private int scoreToBeDisplayedInUI;
 
@@ -23,6 +25,7 @@ public class ViewPacmanGame extends JFrame implements Observer {
         initializeWindow();
         initializePanelPacmanGame(pacmanGame);
         initializeScoreLabel();
+        initializeIsFrightenedModeLabel();
         initializeMazeLayoutsMenu();
         addComponentsToWindow();
         this.scoreToBeDisplayedInUI = 0;
@@ -38,7 +41,14 @@ public class ViewPacmanGame extends JFrame implements Observer {
 
     private void initializeScoreLabel() {
         scoreLabel = new JLabel("Score: 0");
+        scoreLabel.setForeground(Color.DARK_GRAY);
     }
+
+    private void initializeIsFrightenedModeLabel() {
+        isFrightenedMode = new JLabel("!!!!! FrightenedMode !!!!!");
+        isFrightenedMode.setForeground(Color.RED);
+    }
+
 
     private void initializePanelPacmanGame(PacmanGame pacmanGame) {
         panelPacmanGame = new PanelPacmanGame(pacmanGame.getMaze());
@@ -55,6 +65,8 @@ public class ViewPacmanGame extends JFrame implements Observer {
         topPanel.add(menuLabel);
         topPanel.add(mazeLayoutsMenu);
         topPanel.add(scoreLabel);
+        topPanel.add(isFrightenedMode);
+        isFrightenedMode.setVisible(false);
 
         this.add(topPanel, BorderLayout.NORTH);
         this.setVisible(true);
@@ -75,10 +87,10 @@ public class ViewPacmanGame extends JFrame implements Observer {
         updateGhostsPosition(game);
         updateMazeState(game);
         this.scoreToBeDisplayedInUI = game.getScore();
-        scoreLabel.setForeground(Color.GREEN);
         scoreLabel.setText("Score: " + this.scoreToBeDisplayedInUI);
+        isFrightenedMode.setVisible(game.ghosts.get(0).getAgentState() == AgentState.SCARED);
+
         panelPacmanGame.repaint();
-        //System.out.println("state --> " + game.getGameState());
     }
 
     private void updatePacmanPosition(PacmanGame game) {

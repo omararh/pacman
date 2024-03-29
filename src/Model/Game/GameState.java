@@ -1,5 +1,5 @@
 package Model.Game;
 
-public enum State {
-    START, RUN, PAUSE, GAME_OVER, VICTORY
+public enum GameState {
+    START, RUN, GAME_OVER, VICTORY
 }

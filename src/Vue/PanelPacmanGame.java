@@ -17,6 +17,7 @@ public class PanelPacmanGame extends JPanel {
 
 	private Color ghostsColor = Color.white;
 	private Color ghostScarredColor = Color.pink;
+	private Color controlledGhost = Color.BLACK;
 
 	private double sizeFood = 0.3;
 	private Color colorFood = Color.white;
@@ -105,6 +106,14 @@ public class PanelPacmanGame extends JPanel {
 				drawGhosts(g, pos.getX(), pos.getY(), ghostsColor);
 			}
 		}
+	}
+
+	/**
+	 * This method will be called when a Client will choose to control the ghost
+	 */
+	void setColorOfControlledGhost(Graphics g) {
+		PositionAgent pos = ghosts_pos.get(0);
+		drawGhosts(g, pos.getX(), pos.getY(), controlledGhost);
 	}
 
 	void drawPacmans(Graphics g, int px, int py, int pacmanDirection,

@@ -1,4 +1,4 @@
-package Model.Strategies;
+package Model.Agent.Strategies;
 
 import Model.Agent.Agent;
 import Model.Agent.AgentAction;

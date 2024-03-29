@@ -2,6 +2,7 @@ package Vue;
 
 import Controller.AbstractController;
 import Model.Game.Game;
+import Model.Game.GameState;
 import Model.Game.PacmanGame;
 
 import javax.swing.JFrame;
@@ -13,10 +14,7 @@ import javax.swing.JSlider;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import java.awt.GridLayout;
-import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
-import java.awt.Point;
+import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -39,9 +37,14 @@ public class ViewCommand implements Observer {
     private JLabel text;
     private AbstractController controller;
     private Game game;
+    private JFrame imageFrame;
+
     static final int slider_min = 0;
     static final int slider_max = 10;
     public static final int slider_init = 2;
+    private final String GAME_OVER_IMAGE_PATH = "out/production/omar-arharbi-packman/Icons/game_over.png";
+    private final String YOU_WIW_IMAGE_PATH = "out/production/omar-arharbi-packman/Icons/you_win.png";
+
 
     public ViewCommand(AbstractController controller, Game game) {
         this.controller = controller;
@@ -123,6 +126,7 @@ public class ViewCommand implements Observer {
         text = new JLabel("", SwingConstants.CENTER);
         setTurn(0);
     }
+
     private void initSlider() {
         sliderLabel = new JLabel("Number of turn per second", JLabel.CENTER);
         slider = new JSlider(JSlider.HORIZONTAL, slider_min, slider_max,
@@ -184,15 +188,40 @@ public class ViewCommand implements Observer {
         windowCommand.add(mainPanel);
         windowCommand.setVisible(true);
     }
+
+    /*
+     * @param String path : path to the image that we will display     *
+     *  an image when the game is finished to express to the player if he won or lost
+     */
+    private void displayEndGameImage(String path) throws InterruptedException {
+        imageFrame = new JFrame();
+        imageFrame.setUndecorated(true);
+        imageFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        ImageIcon originalIcon = new ImageIcon(path);
+
+        JLabel imageLabel = new JLabel(originalIcon);
+        imageFrame.add(imageLabel);
+        imageFrame.setVisible(true);
+        Thread.sleep(500);
+        imageFrame.setVisible(false);
+}
+
+
     @Override
     public void update(Observable o, Object arg) {
         setTurn((int) arg);
-        PacmanGame game = (PacmanGame) o;
 
-        //this will be useful for the keyboard strategy :
-        // if game.score > 0 && state == start && strategy == "keyboard
-        // we should activate run, stop and restart
-        // if we click in "run or step" buttons we will change strategy for pacman to random
+        try {
+            if (game.getCurrentState() == GameState.GAME_OVER) {
+                displayEndGameImage(GAME_OVER_IMAGE_PATH);
+            }else if (game.getCurrentState() == GameState.VICTORY){
+                displayEndGameImage(YOU_WIW_IMAGE_PATH);
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
 

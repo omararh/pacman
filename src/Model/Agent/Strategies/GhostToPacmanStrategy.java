@@ -10,9 +10,9 @@ import Model.Game.PacmanGame;
 import java.util.ArrayList;
 
 // ------- In this strategy the ghost will be trying to catch pacman -------------- //
-public class SimpleGhostStrategy extends MouvementStrategy {
+public class GhostToPacmanStrategy extends MouvementStrategy {
 
-    public SimpleGhostStrategy(PacmanGame game) {
+    public GhostToPacmanStrategy(PacmanGame game) {
         super(game);
     }
 

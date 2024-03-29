@@ -1,2 +1,5 @@
-package Model.Agent;public enum AgentState {
+package Model.Agent;
+
+public enum AgentState {
+    ALIVE, DEAD, SCARED
 }

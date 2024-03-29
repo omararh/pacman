@@ -11,15 +11,21 @@ public abstract class Game extends Observable implements Runnable, Serializable 
     protected boolean isRunning = false;
     protected Thread thread;
     protected long nbTurnsBySecond;
+    protected GameState currentState;
 
     public Game(int maxTurn) {
         this.maxTurn = maxTurn;
         this.nbTurnsBySecond = 1000/ ViewCommand.slider_init;
         this.turn = 0;
+        this.init();
     }
 
     public int getTurn() {
         return turn;
+    }
+
+    public GameState getCurrentState(){
+        return currentState;
     }
 
 
@@ -33,6 +39,7 @@ public abstract class Game extends Observable implements Runnable, Serializable 
         turn = 0;
         this.isRunning = false;
         this.initializeGame();
+        this.currentState = GameState.START;
         setChanged();
         notifyObservers(turn);
     }
@@ -41,24 +48,24 @@ public abstract class Game extends Observable implements Runnable, Serializable 
 
     protected abstract boolean gameContinue();
 
-    protected void gameOver(){
-        this.isRunning = false;
-    }
-     /*
+    protected abstract void gameOver();
+
+    /*
      * when it adds a turn the observable should notify all the observers
      */
     public void step() {
-        boolean isFinished = this.gameContinue();
-        if(this.turn < this.maxTurn && isFinished){
+        if(this.turn < this.maxTurn && this.gameContinue()){
             turn++;
-            setChanged();
             this.takeTurn();
-            notifyObservers(turn);
-            return;
+            this.currentState = GameState.RUN;
+        }else{
+            this.isRunning = false;
+            this.currentState = GameState.GAME_OVER;
+            this.gameOver();
         }
 
-        this.isRunning = false;
-        this.gameOver();
+        setChanged();
+        notifyObservers(turn);
     }
 
     public void pause() {
