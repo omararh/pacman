@@ -9,12 +9,18 @@ public class Agent {
     private TypeOfAgent agentType;
     private MouvementStrategy mouvementStrategy;
     private AgentState agentState;
+    private int pacmanId;
+
+    private static int cp = 1;
 
     public Agent(PositionAgent position, TypeOfAgent agentType) {
         this.position = position;
         this.initialPosition = position;
         this.agentType = agentType;
         this.agentState = AgentState.ALIVE;
+
+        if(agentType == TypeOfAgent.PACMAN)
+            this.pacmanId = cp++;
     }
     public void setPosition(PositionAgent position) {
         this.position = position;
@@ -38,6 +44,10 @@ public class Agent {
 
     public MouvementStrategy getMouvementStrategy() {
         return mouvementStrategy;
+    }
+
+    public int getPacmanId() {
+        return this.pacmanId;
     }
 
     public void setMouvementStrategy(MouvementStrategy mouvementStrategy) {

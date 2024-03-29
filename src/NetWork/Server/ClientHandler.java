@@ -12,11 +12,15 @@ import java.util.Arrays;
 public class ClientHandler extends Thread {
     private Socket clientSocket;
     private PacmanGameActions pacmanGameActions;
-
+    private static int cp = 1;
+    private int id;
 
     public ClientHandler(Socket socket, PacmanGameActions pacmanGameActions) {
         this.clientSocket = socket;
         this.pacmanGameActions = pacmanGameActions;
+        this.id = cp++;
+
+        System.out.println("The clientHandler id is --> " + this.id);
     }
 
     public void run() {
@@ -31,7 +35,8 @@ public class ClientHandler extends Thread {
                     continue;
                 }
                 System.out.println("chosen key ----> |" + sentKey + "|");
-                this.pacmanGameActions.handleKeyboardMovement(sentKey.charAt(0), true);
+
+                this.pacmanGameActions.handleKeyboardMovement(sentKey.charAt(0), true, this.id);
             }
             clientSocket.close();
         } catch (IOException e) {

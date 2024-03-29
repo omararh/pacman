@@ -64,7 +64,7 @@ public class ControllerPacmanGame extends AbstractController implements PacmanGa
      * @param boolean isPressed
      * @return AgentAction
      */
-    public void handleKeyboardMovement(char keyChar, boolean isPressed) {
+    public void handleKeyboardMovement(char keyChar, boolean isPressed, Integer pacManId) {
         if (!isPressed || ((PacmanGame) game).pacmans.isEmpty()) {
             return;
         }
@@ -76,6 +76,14 @@ public class ControllerPacmanGame extends AbstractController implements PacmanGa
             case 'a' -> action = new AgentAction(AgentAction.WEST);
             case 'd' -> action = new AgentAction(AgentAction.EAST);
             default -> action = new AgentAction(AgentAction.STOP);
+        }
+
+        if(pacManId != null) {
+            Agent pacman = ((PacmanGame) game).pacmans.stream().filter(p -> p.getPacmanId() == pacManId).findFirst().orElse(null);
+
+            assert pacman != null;
+            pacman.setMouvementStrategy(new KeyBoardControlStrategy((PacmanGame) game, action));
+            return;
         }
 
         Agent firstPacman = ((PacmanGame) game).pacmans.get(0);

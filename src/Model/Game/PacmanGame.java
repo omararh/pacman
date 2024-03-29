@@ -4,7 +4,6 @@ import Model.Agent.*;
 import Model.Agent.Strategies.*;
 
 import java.util.List;
-import java.util.ArrayList;
 
 public class PacmanGame extends Game {
     private Maze maze;

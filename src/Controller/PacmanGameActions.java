@@ -1,5 +1,5 @@
 package Controller;
 
 public interface PacmanGameActions {
-    void handleKeyboardMovement(char key, boolean state);
+    void handleKeyboardMovement(char key, boolean state, Integer pacManId);
 }
