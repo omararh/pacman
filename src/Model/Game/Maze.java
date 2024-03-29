@@ -266,6 +266,30 @@ public class Maze implements Serializable, Cloneable {
 		return (Maze) super.clone();
 	}
 
+	public int getNbFood() {
+		int count = 0;
+		for (int x = 0; x < size_x; x++) {
+			for (int y = 0; y < size_y; y++) {
+				if (food[x][y]) {
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+
+	public int getNbCapsule() {
+		int count = 0;
+		for (int x = 0; x < size_x; x++) {
+			for (int y = 0; y < size_y; y++) {
+				if (capsules[x][y]) {
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+
 	/*
 	 * reinitialize food and capsules
 	 */

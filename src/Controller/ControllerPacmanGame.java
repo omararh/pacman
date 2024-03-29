@@ -1,4 +1,5 @@
 package Controller;
+import Model.Agent.Agent;
 import Model.Agent.Strategies.KeyBoardControlStrategy;
 import Model.Game.Maze;
 import Model.Game.PacmanGame;
@@ -64,20 +65,20 @@ public class ControllerPacmanGame extends AbstractController implements PacmanGa
      * @return AgentAction
      */
     public void handleKeyboardMovement(char keyChar, boolean isPressed) {
-        if(!isPressed){
+        if (!isPressed || ((PacmanGame) game).pacmans.isEmpty()) {
             return;
         }
 
         AgentAction action;
         switch (keyChar) {
-            case 'w' -> action = new AgentAction(AgentAction.NORTH); // top
-            case 's' -> action = new AgentAction(AgentAction.SOUTH); // bottom
-            case 'a' -> action = new AgentAction(AgentAction.EAST);  // right
-            case 'd' -> action = new AgentAction(AgentAction.WEST);  // left
+            case 'w' -> action = new AgentAction(AgentAction.NORTH);
+            case 's' -> action = new AgentAction(AgentAction.SOUTH);
+            case 'a' -> action = new AgentAction(AgentAction.WEST);
+            case 'd' -> action = new AgentAction(AgentAction.EAST);
             default -> action = new AgentAction(AgentAction.STOP);
         }
-        // move the pacman
-        ((PacmanGame) game).pacman.setMouvementStrategy(new KeyBoardControlStrategy((PacmanGame) game, action));
-        // move the ghosts
+
+        Agent firstPacman = ((PacmanGame) game).pacmans.get(0);
+        firstPacman.setMouvementStrategy(new KeyBoardControlStrategy((PacmanGame) game, action));
     }
 }

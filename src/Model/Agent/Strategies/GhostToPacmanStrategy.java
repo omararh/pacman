@@ -29,9 +29,25 @@ public class GhostToPacmanStrategy extends MouvementStrategy {
             throw new IllegalArgumentException("The Agent should be a ghost.");
         }
 
-        PositionAgent pacmanPosition = pacmanGame.pacman.getPosition();
+        PositionAgent nearestPacmanPosition = getNearestPacmanPosition(pacmanGame, ghost);
         ArrayList<AgentAction> possibleActions = getPossibleActions(ghost);
-        return chooseBestAction(ghost, pacmanPosition, possibleActions);
+        return chooseBestAction(ghost, nearestPacmanPosition, possibleActions);
+    }
+
+    private PositionAgent getNearestPacmanPosition(PacmanGame pacmanGame, Agent ghost) {
+        double minDistance = Double.MAX_VALUE;
+        PositionAgent nearestPacmanPosition = null;
+
+        for (Agent pacman : pacmanGame.pacmans) {
+            double distance = Math.sqrt(Math.pow(pacman.getPosition().getX() - ghost.getPosition().getX(), 2)
+                    + Math.pow(pacman.getPosition().getY() - ghost.getPosition().getY(), 2));
+            if (distance < minDistance) {
+                minDistance = distance;
+                nearestPacmanPosition = pacman.getPosition();
+            }
+        }
+
+        return nearestPacmanPosition;
     }
 
 

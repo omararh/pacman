@@ -21,10 +21,27 @@ public class GhostsFrightenedModeStrategy extends MouvementStrategy {
             throw new IllegalArgumentException("The Agent should be a ghost.");
         }
 
-        PositionAgent pacmanPosition = pacmanGame.pacman.getPosition();
+        PositionAgent nearestPacmanPosition = getNearestPacmanPosition(pacmanGame, ghost);
         ArrayList<AgentAction> possibleActions = getPossibleActions(ghost, pacmanGame);
-        return chooseWorstAction(ghost, pacmanPosition, possibleActions);
+        return chooseWorstAction(ghost, nearestPacmanPosition, possibleActions);
     }
+
+    private PositionAgent getNearestPacmanPosition(PacmanGame pacmanGame, Agent ghost) {
+        double minDistance = Double.MAX_VALUE;
+        PositionAgent nearestPacmanPosition = null;
+
+        for (Agent pacman : pacmanGame.pacmans) {
+            double distance = Math.sqrt(Math.pow(pacman.getPosition().getX() - ghost.getPosition().getX(), 2)
+                    + Math.pow(pacman.getPosition().getY() - ghost.getPosition().getY(), 2));
+            if (distance < minDistance) {
+                minDistance = distance;
+                nearestPacmanPosition = pacman.getPosition();
+            }
+        }
+
+        return nearestPacmanPosition; // S'assurer qu'il y a au moins un Pac-Man dans la liste
+    }
+
 
     private ArrayList<AgentAction> getPossibleActions(Agent ghost, PacmanGame pacmanGame) {
         ArrayList<AgentAction> possibleActions = new ArrayList<>();

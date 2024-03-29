@@ -95,7 +95,9 @@ public class ViewPacmanGame extends JFrame implements Observer {
 
     private void updatePacmanPosition(PacmanGame game) {
         ArrayList<PositionAgent> pacmanPositions = new ArrayList<>();
-        pacmanPositions.add(game.pacman.getPosition());
+        for (Agent pacman : game.pacmans) { // Modified for multiple Pac-Man
+            pacmanPositions.add(pacman.getPosition());
+        }
         panelPacmanGame.setPacmans_pos(pacmanPositions);
     }
 
@@ -108,9 +110,13 @@ public class ViewPacmanGame extends JFrame implements Observer {
     }
 
     private void updateMazeState(PacmanGame game) {
-        int x = game.pacman.getPosition().getX();
-        int y = game.pacman.getPosition().getY();
-        game.getMaze().setFood(x, y, false);
-        game.getMaze().setCapsule(x, y, false);
+
+        for (Agent pacman : game.pacmans) {
+            int x = pacman.getPosition().getX();
+            int y = pacman.getPosition().getY();
+
+            game.getMaze().setFood(x, y, false);
+            game.getMaze().setCapsule(x, y, false);
+        }
     }
 }
